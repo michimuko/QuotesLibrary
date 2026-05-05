@@ -22,7 +22,6 @@ class UserStatus extends Model
         return $this->belongsTo(User::class);
     }
 
-
     // Vue3（Inertia）側で「あと何ポイントで次か」などを計算するために
     // 常に型を保証して返す。
     protected function casts(): array
