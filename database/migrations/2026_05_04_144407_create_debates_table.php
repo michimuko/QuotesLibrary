@@ -14,15 +14,13 @@ return new class extends Migration
         Schema::create('debates', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->foreignId('quote_id_1')
-                  ->constrained('quotes')
-                  ->cascadeOnDelete();
-            $table->foreignId('quote_id_2')
-                  ->constrained('quotes')
-                  ->cascadeOnDelete();
+            $table->foreignId('quote_id_1')->constrained('quotes')->cascadeOnDelete();
+            $table->foreignId('quote_id_2')->constrained('quotes')->cascadeOnDelete();
+            $table->text('description')->nullable()->after('title');
             // best_comment_id は debate_comments 作成後に追加するため nullable で先行定義
             $table->unsignedBigInteger('best_comment_id')->nullable();
             $table->enum('status', ['open', 'closed'])->default('open');
+            $table->timestamp('expires_at')->nullable()->after('description');
             $table->softDeletes();
             $table->timestamps();
         });

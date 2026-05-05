@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_stats', function (Blueprint $table) {
+        Schema::create('user_status', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-                  ->constrained()
-                  ->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->integer('points')->default(0);
             $table->string('rank_label')->default('探求者');
+            $table->integer('next_rank_points')->default(0)->after('points');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_stats');
+        Schema::dropIfExists('user_status');
     }
 };

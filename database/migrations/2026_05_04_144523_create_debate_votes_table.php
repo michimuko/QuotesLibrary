@@ -13,18 +13,12 @@ return new class extends Migration
     {
         Schema::create('debate_votes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-                  ->constrained()
-                  ->cascadeOnDelete();
-            $table->foreignId('debate_id')
-                  ->constrained()
-                  ->cascadeOnDelete();
-            $table->foreignId('voted_quote_id')
-                  ->constrained('quotes')
-                  ->cascadeOnDelete();
-            $table->timestamps();
-
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('debate_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('voted_quote_id')->constrained('quotes')->cascadeOnDelete();
             $table->unique(['user_id', 'debate_id']);
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

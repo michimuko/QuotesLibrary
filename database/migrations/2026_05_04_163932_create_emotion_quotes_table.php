@@ -10,13 +10,16 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('reactions', function (Blueprint $table) {
+    {   
+        // 中間テーブルの作成
+        Schema::create('emotion_quotes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            // 名言テーブルへの外部キー
             $table->foreignId('quote_id')->constrained()->cascadeOnDelete();
-            $table->enum('type', ['saved', 'emotional','inspiring'])->default('saved')->after('quote_id');
-            $table->unique(['user_id', 'quote_id']);
+            // 感情テーブルへの外部キー
+            $table->foreignId('emotion_id')->constrained()->cascadeOnDelete();
+            // 同じ名言に同じ感情を重複して登録させないための制約
+            $table->unique(['quote_id', 'emotion_id']);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reactions');
+        Schema::dropIfExists('emotion_quotes');
     }
 };

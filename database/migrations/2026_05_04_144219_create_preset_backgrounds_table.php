@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('image_path');
             $table->string('theme_color');
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 

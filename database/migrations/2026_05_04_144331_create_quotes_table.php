@@ -13,15 +13,9 @@ return new class extends Migration
     {
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-                  ->constrained()
-                  ->cascadeOnDelete();
-            $table->foreignId('author_id')
-                  ->constrained()
-                  ->cascadeOnDelete();
-            $table->foreignId('preset_background_id')
-                  ->constrained()
-                  ->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('author_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('preset_background_id')->constrained()->cascadeOnDelete();
             $table->text('content');
             $table->text('episode')->nullable();
             $table->enum('status', ['active', 'pending', 'hidden'])->default('pending');

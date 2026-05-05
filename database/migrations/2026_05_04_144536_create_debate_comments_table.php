@@ -10,12 +10,8 @@ return new class extends Migration
     {
         Schema::create('debate_comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('debate_id')
-                  ->constrained()
-                  ->cascadeOnDelete();
-            $table->foreignId('user_id')
-                  ->constrained()
-                  ->cascadeOnDelete();
+            $table->foreignId('debate_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->text('content');
             $table->boolean('is_best')->default(false);
             $table->timestamps();
