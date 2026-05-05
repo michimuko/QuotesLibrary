@@ -22,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'profile_image_path'
     ];
 
     /**
@@ -45,5 +47,35 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    // ユーザーの成長記録（1対1）
+    public function status(): HasOne
+    {
+        return $this->hasOne(UserStatus::class);
+    }
+
+    // 投稿した名言（1対多）
+    public function quotes(): HasMany
+    {
+        return $this->hasMany(Quote::class);
+    }
+
+    // リアクションした名言（多対多）
+    public function reactions(): BelongsToMany
+    {
+        return $this->belongsToMany(Quote::class, 'reactions')
+                    ->withTimestamps();
+    }
+
+    // 議論への投票（1対多）
+    public function debateVotes(): HasMany
+    {
+        return $this->hasMany(DebateVote::class);
+    }
+
+    // 議論へのコメント（1対多）
+    public function debateComments(): HasMany
+    {
+        return $this->hasMany(DebateComment::class);
     }
 }
