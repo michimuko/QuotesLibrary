@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('color_code', 7)->nullable()->after('name');
+            $table->string('color_code', 7)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

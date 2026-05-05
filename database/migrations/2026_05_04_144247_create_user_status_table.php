@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->integer('points')->default(0);
             $table->string('rank_label')->default('探求者');
-            $table->integer('next_rank_points')->default(0)->after('points');
+            $table->integer('next_rank_points')->default(0);
             $table->timestamps();
         });
     }

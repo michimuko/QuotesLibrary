@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->string('name');
-            $table->text('description')->nullable();
             $table->boolean('is_user_original')->default(false);
-            $table->foreignId('user_id')->nullable()->after('id')->constrained()->nullOnDelete();
+            $table->text('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

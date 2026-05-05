@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('quote_id')->constrained()->cascadeOnDelete();
-            $table->enum('type', ['saved', 'emotional','inspiring'])->default('saved')->after('quote_id');
+            $table->enum('type', ['saved', 'emotional','inspiring'])->default('saved');
             $table->unique(['user_id', 'quote_id']);
             $table->softDeletes();
             $table->timestamps();
